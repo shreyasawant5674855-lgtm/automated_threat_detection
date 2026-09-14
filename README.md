@@ -46,3 +46,25 @@ The Automated Threat Detection System is designed to identify and detect potenti
 
 \- Git \& GitHub
 
+\## Week 1 Progress
+
+
+
+During Week 1, the project repository was successfully set up and organized.
+
+
+
+\### Completed Tasks
+
+\- Created the GitHub repository.
+
+\- Added README and .gitignore files.
+
+\- Created the development branch.
+
+\- Set up the project folder structure.
+
+\- Updated the README with project information and objectives.
+
+\- Reviewed the repository and fixed setup issues.
+
