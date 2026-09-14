@@ -68,3 +68,33 @@ During Week 1, the project repository was successfully set up and organized.
 
 \- Reviewed the repository and fixed setup issues.
 
+
+## Week 2 Progress
+
+### Day 8 - Requirements Gathering
+- Researched existing threat detection systems.
+- Identified system requirements.
+- Defined functional and non-functional requirements.
+- Created system scope and architecture.
+
+### Day 9 - AI/ML Integration
+- Researched AI/ML algorithms for threat detection.
+- Selected suitable algorithms.
+- Planned AI/ML integration.
+- Designed AI-driven data flow.
+- Defined human oversight.
+
+### Day 10 - Data Collection & Preprocessing
+- Researched cybersecurity data sources.
+- Planned data collection and storage.
+- Designed preprocessing pipeline.
+- Selected suitable data formats.
+- Created data quality assurance plan.
+
+### Day 11 - System Design & Prototype
+- Created detailed system design.
+- Planned core prototype components.
+- Designed UI/UX.
+- Planned testing and evaluation.
+- Researched vulnerabilities and mitigation strategies.
+
