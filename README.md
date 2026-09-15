@@ -113,3 +113,34 @@ During Week 3, the AI-based threat detection system was integrated and tested.
 ### Week 3 Status
 
 Week 3 tasks completed successfully.
+
+## Week 4 Review
+
+During Week 4, the automated threat detection model was optimized, integrated, tested, evaluated, and refined.
+
+### Work Completed
+
+* Optimized the Random Forest model for faster threat detection.
+* Tested different network traffic scenarios.
+* Reduced false positives using a probability threshold.
+* Saved the trained model as `threat_detection_model.pkl`.
+* Implemented automated threat detection.
+* Tested model integration successfully.
+* Evaluated Accuracy, Precision, and Recall.
+* Refined the model using probability-based detection.
+* Documented the model's strengths and weaknesses.
+
+### Week 4 Status
+
+Week 4 tasks were completed successfully.
+## Week 5 Plan
+
+### Planned Tasks
+
+* Improve the threat detection system.
+* Test the system with additional network traffic data.
+* Improve model reliability and detection performance.
+* Add more useful features to the detection system.
+* Perform further testing and debugging.
+* Improve documentation and project presentation.
+* Prepare the project for final demonstration and submission.
