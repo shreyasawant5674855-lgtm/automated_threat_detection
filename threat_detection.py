@@ -10,12 +10,12 @@ data = pd.read_csv("augmented_network_traffic.csv")
 X = data[["bytes", "packets"]]
 y = data["label"]
 
-# Split data
+# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# Random Forest with regularization to prevent overfitting
+# Create the final model
 model = RandomForestClassifier(
     n_estimators=50,
     max_depth=3,
@@ -33,8 +33,8 @@ y_pred = model.predict(X_test)
 # Calculate accuracy
 accuracy = accuracy_score(y_test, y_pred)
 
-print("Overfitting prevention completed!")
-print("Max Depth:", model.max_depth)
-print("Minimum Samples Split:", model.min_samples_split)
-print("Minimum Samples Leaf:", model.min_samples_leaf)
-print("Model Accuracy:", accuracy)
+print("Model testing completed!")
+print("Testing samples:", len(X_test))
+print("Actual labels:", list(y_test))
+print("Predicted labels:", list(y_pred))
+print("Test Accuracy:", accuracy)
