@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import pandas as pd
 import joblib
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the trained AI model
 model = joblib.load("threat_detection_model.pkl")

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Threat Monitoring Dashboard</title>
@@ -8,43 +7,60 @@
 
 <body>
 
-```
-<div class="container">
+    <div class="container">
 
-    <h1>Threat Monitoring Dashboard</h1>
-    <p class="subtitle">Automated Network Threat Detection</p>
+        <h1>Threat Monitoring Dashboard</h1>
+        <p class="subtitle">Automated Network Threat Detection</p>
 
-    <div class="card">
-        <h2>System Status</h2>
-        <p>🟢 System Active</p>
+        <div class="card">
+            <h2>System Status</h2>
+            <p>🟢 System Active</p>
+        </div>
+
+        <div class="card">
+            <h2>Network Traffic Detection</h2>
+
+            <input type="number" id="bytes" placeholder="Bytes">
+            <br><br>
+
+            <input type="number" id="packets" placeholder="Packets">
+            <br><br>
+
+            <button onclick="checkThreat()">Check Traffic</button>
+
+            <p id="result"></p>
+        </div>
+
+        <div class="card">
+            <h2>Threat Summary</h2>
+            <p>Detection system is connected to the AI backend.</p>
+        </div>
+
     </div>
 
-    <div class="card">
-        <h2>Network Monitoring</h2>
-        <p>Network traffic is being monitored for suspicious activity.</p>
-        <button onclick="checkThreat()">Check Traffic</button>
-        <p id="result"></p>
-    </div>
+    <script>
+        async function checkThreat() {
 
-    <div class="card">
-        <h2>Threat Summary</h2>
-        <p>Threats Detected: <strong id="threats">0</strong></p>
-        <p>System Status: Monitoring</p>
-    </div>
+            const bytes = Number(document.getElementById("bytes").value);
+            const packets = Number(document.getElementById("packets").value);
 
-</div>
+            const response = await fetch("http://127.0.0.1:5000/detect", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    bytes: bytes,
+                    packets: packets
+                })
+            });
 
-<script>
-    let threatCount = 0;
+            const data = await response.json();
 
-    function checkThreat() {
-        threatCount++;
-        document.getElementById("threats").innerText = threatCount;
-        document.getElementById("result").innerText =
-            "🚨 Network traffic checked successfully.";
-    }
-</script>
-```
+            document.getElementById("result").innerText =
+                data.result;
+        }
+    </script>
 
 </body>
 </html>
