@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Threat Monitoring Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <h1>Threat Monitoring Dashboard</h1>
+    <p class="subtitle">Automated Network Threat Detection</p>
+
+    <div class="card">
+        <h2>System Status</h2>
+        <p>🟢 System Active</p>
+    </div>
+
+    <div class="card">
+        <h2>Network Monitoring</h2>
+        <p>Network traffic is being monitored for suspicious activity.</p>
+        <button onclick="checkThreat()">Check Traffic</button>
+        <p id="result"></p>
+    </div>
+
+    <div class="card">
+        <h2>Threat Summary</h2>
+        <p>Threats Detected: <strong id="threats">0</strong></p>
+        <p>System Status: Monitoring</p>
+    </div>
+
+</div>
+
+<script>
+    let threatCount = 0;
+
+    function checkThreat() {
+        threatCount++;
+        document.getElementById("threats").innerText = threatCount;
+        document.getElementById("result").innerText =
+            "🚨 Network traffic checked successfully.";
+    }
+</script>
+```
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login - Threat Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+```
+<div class="container">
+    <div class="card">
+        <h1>Login</h1>
+
+        <p>Threat Detection System</p>
+
+        <input type="text" id="username" placeholder="Username">
+        <br><br>
+
+        <input type="password" id="password" placeholder="Password">
+        <br><br>
+
+        <button onclick="login()">Login</button>
+
+        <p id="message"></p>
+    </div>
+</div>
+
+<script>
+    function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
+
+        if (username === "admin" && password === "admin123") {
+            message.innerText = "Login successful!";
+        } else {
+            message.innerText = "Invalid username or password.";
+        }
+    }
+</script>
+```
+
+</body>
+</html>
