@@ -1,17 +1,32 @@
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestClassifier
 
-# Sample threat data
-X = [
-    [10, 2, 1],
-    [12, 1, 0],
-    [50, 20, 10],
-    [45, 18, 8],
-    [8, 1, 0],
-    [60, 25, 15]
-]
+# Load network traffic dataset
+data = pd.read_csv("network_traffic.csv")
 
-# 0 = Normal, 1 = Threat
-y = [0, 0, 1, 1, 0, 1]
+print("Original Data:")
+print(data)
+
+# 1. Handle missing values
+data = data.fillna(0)
+
+# 2. Normalize numerical features
+features = ["bytes", "packets"]
+
+scaler = MinMaxScaler()
+data[features] = scaler.fit_transform(data[features])
+
+print("\nPreprocessed Data:")
+print(data)
+
+# Convert labels into numbers
+# Normal = 0, Attack = 1
+data["label"] = data["label"].map({"Normal": 0, "Attack": 1})
+
+# Features and labels
+X = data[["bytes", "packets"]]
+y = data["label"]
 
 # Create Random Forest model
 model = RandomForestClassifier(n_estimators=100, random_state=42)
@@ -20,12 +35,20 @@ model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X, y)
 
 # Test sample
-sample = [[55, 22, 12]]
+sample = [[22000, 350]]
+
+# Normalize test sample
+sample = scaler.transform(sample)
 
 # Make prediction
 prediction = model.predict(sample)
 
 if prediction[0] == 1:
-    print("Threat Detected")
+    print("\nThreat Detected")
 else:
-    print("Normal Activity")
+    print("\nNormal Activity")
+
+# Save preprocessed data
+data.to_csv("preprocessed_network_traffic.csv", index=False)
+
+print("\nData preprocessing completed!")
