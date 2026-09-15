@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import precision_score, recall_score, roc_auc_score
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score
 
 # Load preprocessed data
 data = pd.read_csv("augmented_network_traffic.csv")
@@ -10,32 +10,38 @@ data = pd.read_csv("augmented_network_traffic.csv")
 X = data[["bytes", "packets"]]
 y = data["label"]
 
-# Split the data
+# Split data
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# Create AI model
-model = RandomForestClassifier(
-    n_estimators=100,
-    random_state=42
+# Create Random Forest model
+model = RandomForestClassifier(random_state=42)
+
+# Hyperparameters to test
+parameters = {
+    "n_estimators": [50, 100, 150],
+    "max_depth": [3, 5, 10]
+}
+
+# Find the best combination
+grid_search = GridSearchCV(
+    model,
+    parameters,
+    cv=3,
+    scoring="accuracy"
 )
 
-# Train the model
-model.fit(X_train, y_train)
+grid_search.fit(X_train, y_train)
 
-# Make predictions
-y_pred = model.predict(X_test)
+# Best model
+best_model = grid_search.best_estimator_
 
-# Get prediction probabilities for ROC-AUC
-y_prob = model.predict_proba(X_test)[:, 1]
+# Test the best model
+y_pred = best_model.predict(X_test)
 
-# Calculate evaluation metrics
-precision = precision_score(y_test, y_pred, zero_division=0)
-recall = recall_score(y_test, y_pred, zero_division=0)
-roc_auc = roc_auc_score(y_test, y_prob)
+accuracy = accuracy_score(y_test, y_pred)
 
-print("Model Evaluation:")
-print("Precision:", precision)
-print("Recall:", recall)
-print("ROC-AUC:", roc_auc)
+print("Hyperparameter tuning completed!")
+print("Best Parameters:", grid_search.best_params_)
+print("Accuracy after tuning:", accuracy)
