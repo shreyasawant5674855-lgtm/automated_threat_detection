@@ -98,3 +98,18 @@ During Week 1, the project repository was successfully set up and organized.
 - Planned testing and evaluation.
 - Researched vulnerabilities and mitigation strategies.
 
+## Week 3 Progress
+
+### Automated Threat Detection System
+
+During Week 3, the AI-based threat detection system was integrated and tested.
+
+- Integrated the trained Random Forest model with the detection system.
+- Implemented a feedback loop to add new threat data and update the model.
+- Generated alerts and notifications for detected threats.
+- Stored model performance metrics including Accuracy, Precision, Recall, and ROC-AUC.
+- Tested the integrated system using sample network traffic data.
+
+### Week 3 Status
+
+Week 3 tasks completed successfully.
