@@ -15,7 +15,8 @@ model = RandomForestClassifier(
     max_depth=3,
     min_samples_split=4,
     min_samples_leaf=2,
-    random_state=42
+    random_state=42,
+    n_jobs=-1
 )
 
 model.fit(X, y)
