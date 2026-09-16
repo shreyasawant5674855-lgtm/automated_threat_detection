@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,16 +45,19 @@
             const bytes = Number(document.getElementById("bytes").value);
             const packets = Number(document.getElementById("packets").value);
 
-            const response = await fetch("http://127.0.0.1:5000/detect", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    bytes: bytes,
-                    packets: packets
-                })
-            });
+            const response = await fetch(
+                "https://automated-threat-detection.onrender.com/detect",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        bytes: bytes,
+                        packets: packets
+                    })
+                }
+            );
 
             const data = await response.json();
 
@@ -64,3 +68,4 @@
 
 </body>
 </html>
+```
