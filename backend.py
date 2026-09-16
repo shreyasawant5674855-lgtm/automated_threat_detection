@@ -46,12 +46,19 @@ def detect_threat():
             "error": "Bytes and packets cannot be negative."
         }), 400
 
+    # Prevent extremely large input values
+    if bytes_value > 100000000 or packets_value > 10000000:
+        return jsonify({
+            "error": "Input values are too large."
+        }), 400
+
     # Create cache key
     cache_key = (bytes_value, packets_value)
 
     # Check cache
     if cache_key in prediction_cache:
         result = prediction_cache[cache_key]
+
         return jsonify({
             "result": result,
             "source": "cache"
