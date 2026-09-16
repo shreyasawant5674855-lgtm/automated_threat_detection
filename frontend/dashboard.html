@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +20,10 @@
         <div class="card">
             <h2>Network Traffic Detection</h2>
 
-            <input type="number" id="bytes" placeholder="Bytes">
+            <input type="number" id="bytes" placeholder="Bytes" min="0">
             <br><br>
 
-            <input type="number" id="packets" placeholder="Packets">
+            <input type="number" id="packets" placeholder="Packets" min="0">
             <br><br>
 
             <button onclick="checkThreat()">Check Traffic</button>
@@ -42,30 +41,58 @@
     <script>
         async function checkThreat() {
 
-            const bytes = Number(document.getElementById("bytes").value);
-            const packets = Number(document.getElementById("packets").value);
+            const bytesInput = document.getElementById("bytes").value;
+            const packetsInput = document.getElementById("packets").value;
+            const result = document.getElementById("result");
 
-            const response = await fetch(
-                "https://automated-threat-detection.onrender.com/detect",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        bytes: bytes,
-                        packets: packets
-                    })
+            // Check if fields are empty
+            if (bytesInput === "" || packetsInput === "") {
+                result.innerText = "Please enter both bytes and packets.";
+                return;
+            }
+
+            const bytes = Number(bytesInput);
+            const packets = Number(packetsInput);
+
+            // Check for negative values
+            if (bytes < 0 || packets < 0) {
+                result.innerText = "Bytes and packets cannot be negative.";
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    "https://automated-threat-detection.onrender.com/detect",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            bytes: bytes,
+                            packets: packets
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                // Display API error
+                if (!response.ok) {
+                    result.innerText =
+                        data.error || "Invalid input.";
+                    return;
                 }
-            );
 
-            const data = await response.json();
+                // Display prediction
+                result.innerText = data.result;
 
-            document.getElementById("result").innerText =
-                data.result;
+            } catch (error) {
+                result.innerText =
+                    "Unable to connect to the server.";
+            }
         }
     </script>
 
 </body>
 </html>
-```
