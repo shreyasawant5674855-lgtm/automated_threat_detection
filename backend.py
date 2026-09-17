@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import pandas as pd
 import joblib
+import math
 
 app = Flask(__name__)
 CORS(app)
@@ -38,6 +39,12 @@ def detect_threat():
     except (ValueError, TypeError):
         return jsonify({
             "error": "Bytes and packets must be numeric values."
+        }), 400
+
+    # Prevent non-finite values such as NaN or infinity
+    if not math.isfinite(bytes_value) or not math.isfinite(packets_value):
+        return jsonify({
+            "error": "Bytes and packets must be finite numeric values."
         }), 400
 
     # Prevent negative values
