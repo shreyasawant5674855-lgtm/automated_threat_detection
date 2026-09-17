@@ -15,10 +15,10 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# Create the final model
+# Optimized Random Forest model
 model = RandomForestClassifier(
-    n_estimators=50,
-    max_depth=3,
+    n_estimators=100,
+    max_depth=5,
     min_samples_split=4,
     min_samples_leaf=2,
     random_state=42
@@ -34,6 +34,7 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 
 print("Model testing completed!")
+print("Training samples:", len(X_train))
 print("Testing samples:", len(X_test))
 print("Actual labels:", list(y_test))
 print("Predicted labels:", list(y_pred))
